@@ -31,7 +31,8 @@ export default function App() {
 
   // TODO: 2. Buat fungsi untuk mengubah status completed (true/false) dari task
   const handleToggleTask = (id) => {
-    // Tulis logikamu di sini...
+    setTasks(tasks.map((task) => 
+    task.id === id ? {...task, completed: !task.completed} : task));
   };
 
   // TODO: 3. Buat fungsi untuk menghapus task berdasarkan ID
