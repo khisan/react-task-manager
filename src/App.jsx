@@ -48,9 +48,7 @@ export default function App() {
   });
 
   // TODO: 5. Hitung jumlah task yang belum selesai (completed == false)
-  const activeCount = 0; // ganti ini dengan logika perhitunganmu
-
-  // ---------------------------------------------------------------------------
+  const activeCount = tasks.filter((task) => !task.completed).length;
 
   return (
     <div className="min-h-screen bg-slate-900 text-slate-100 flex flex-col items-center py-10 px-4">
