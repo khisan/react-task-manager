@@ -37,7 +37,7 @@ export default function App() {
 
   // TODO: 3. Buat fungsi untuk menghapus task berdasarkan ID
   const handleDeleteTask = (id) => {
-    // Tulis logikamu di sini...
+    setTasks(tasks.filter((task) => task.id != id));
   };
 
   // TODO: 4. Buat logika filter (ALL / ACTIVE / COMPLETED) untuk array tasks
