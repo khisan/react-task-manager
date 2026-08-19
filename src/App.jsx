@@ -53,7 +53,7 @@ export default function App() {
   return (
     <div className="min-h-screen bg-slate-900 text-slate-100 flex flex-col items-center py-10 px-4">
       {/* Container Utama */}
-      <div className="w-full max-w-2xl bg-slate-800 border border-slate-700/60 rounded-2xl shadow-xl p-6 md:p-8 space-y-8">
+      <div className="w-full max-w-2xl bg-slate-800 border border-slate-700/60 rounded-2xl S-xl p-6 md:p-8 space-y-8">
         
         {/* Header */}
         <header className="flex items-center justify-between border-b border-slate-700/60 pb-6">
@@ -63,8 +63,8 @@ export default function App() {
               Kamu punya <span className="text-indigo-400 font-semibold">{activeCount} task</span> pending hari ini.
             </p>
           </div>
-          <div className="h-10 w-10 rounded-xl bg-indigo-600/20 text-indigo-400 flex items-center justify-center font-bold">
-            TM
+          <div className="h-10 w-30 rounded-xl bg-indigo-600/20 text-indigo-400 flex items-center justify-center font-bold">
+            Task Manager
           </div>
         </header>
 
