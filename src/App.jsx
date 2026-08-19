@@ -41,7 +41,11 @@ export default function App() {
   };
 
   // TODO: 4. Buat logika filter (ALL / ACTIVE / COMPLETED) untuk array tasks
-  const filteredTasks = tasks; // ganti variabel ini dengan logika .filter() kamu
+  const filteredTasks = tasks.filter((task) => {
+    if (filter === 'ACTIVE') return !task.completed;
+    if (filter === 'COMPLETED') return task.completed;
+    return true; // ALL
+  });
 
   // TODO: 5. Hitung jumlah task yang belum selesai (completed == false)
   const activeCount = 0; // ganti ini dengan logika perhitunganmu
