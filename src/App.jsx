@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { Plus, Check, Trash2, Calendar, CheckCircle2, Circle, Filter } from 'lucide-react';
 
 export default function App() {
-  // Mock State untuk data Task
+  // 1. State Management
   const [tasks, setTasks] = useState([
     { id: 1, title: 'Refactor Auth Context', category: 'Dev', completed: false, dueDate: 'Today' },
     { id: 2, title: 'Design Loan Management API DTO', category: 'Backend', completed: true, dueDate: 'Yesterday' },
@@ -10,46 +10,42 @@ export default function App() {
   ]);
 
   const [inputTitle, setInputTitle] = useState('');
-  const [inputCategory, setInputCategory] = useState('');
+  const [inputCategory, setInputCategory] = useState('Dev');
   const [filter, setFilter] = useState('ALL'); // ALL, ACTIVE, COMPLETED
 
-  // Function Handler (Logic Dasar)
+  // TODO: 1. Buat fungsi untuk menambah task baru dari form
   const handleAddTask = (e) => {
     e.preventDefault();
-    if (!inputTitle.trim()) return;
-
+    if (inputTitle.trim() === '') return;
     const newTask = {
       id: Date.now(),
       title: inputTitle,
       category: inputCategory,
       completed: false,
-      dueDate: 'Today',
+      dueDate: 'Today', // Atur tanggal sesuai kebutuhan
     };
-
     setTasks([newTask, ...tasks]);
     setInputTitle('');
+    setInputCategory('Dev'); // Reset kategori ke default
   };
 
+  // TODO: 2. Buat fungsi untuk mengubah status completed (true/false) dari task
   const handleToggleTask = (id) => {
-    setTasks(
-      tasks.map((task) =>
-        task.id === id ? { ...task, completed: !task.completed } : task
-      )
-    );
+    // Tulis logikamu di sini...
   };
 
+  // TODO: 3. Buat fungsi untuk menghapus task berdasarkan ID
   const handleDeleteTask = (id) => {
-    setTasks(tasks.filter((task) => task.id !== id));
+    // Tulis logikamu di sini...
   };
 
-  // Filtering Logic
-  const filteredTasks = tasks.filter((task) => {
-    if (filter === 'ACTIVE') return !task.completed;
-    if (filter === 'COMPLETED') return task.completed;
-    return true; // ALL
-  });
+  // TODO: 4. Buat logika filter (ALL / ACTIVE / COMPLETED) untuk array tasks
+  const filteredTasks = tasks; // ganti variabel ini dengan logika .filter() kamu
 
-  const activeCount = tasks.filter((t) => !t.completed).length;
+  // TODO: 5. Hitung jumlah task yang belum selesai (completed == false)
+  const activeCount = 0; // ganti ini dengan logika perhitunganmu
+
+  // ---------------------------------------------------------------------------
 
   return (
     <div className="min-h-screen bg-slate-900 text-slate-100 flex flex-col items-center py-10 px-4">
