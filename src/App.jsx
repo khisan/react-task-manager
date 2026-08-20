@@ -53,9 +53,9 @@ export default function App() {
         dueDate: 'Today', // Atur tanggal sesuai kebutuhan
     };
     setTasks([newTask, ...tasks]);
+    }
     setInputTitle('');
     setInputCategory('Dev'); // Reset kategori ke default
-    }
   };
 
   // TODO: 5. Buat logika filter (ALL / ACTIVE / COMPLETED) untuk array tasks
