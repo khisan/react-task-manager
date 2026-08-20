@@ -12,42 +12,60 @@ export default function App() {
   const [inputTitle, setInputTitle] = useState('');
   const [inputCategory, setInputCategory] = useState('Dev');
   const [filter, setFilter] = useState('ALL'); // ALL, ACTIVE, COMPLETED
+  const [editId, setEditId] = useState(null);
 
-  // TODO: 1. Buat fungsi untuk menambah task baru dari form
-  const handleAddTask = (e) => {
-    e.preventDefault();
-    if (inputTitle.trim() === '') return;
-    const newTask = {
-      id: Date.now(),
-      title: inputTitle,
-      category: inputCategory,
-      completed: false,
-      dueDate: 'Today', // Atur tanggal sesuai kebutuhan
-    };
-    setTasks([newTask, ...tasks]);
-    setInputTitle('');
-    setInputCategory('Dev'); // Reset kategori ke default
-  };
-
-  // TODO: 2. Buat fungsi untuk mengubah status completed (true/false) dari task
+  // TODO: 1. Buat fungsi untuk mengubah status completed (true/false) dari task
   const handleToggleTask = (id) => {
     setTasks(tasks.map((task) => 
     task.id === id ? {...task, completed: !task.completed} : task));
   };
 
-  // TODO: 3. Buat fungsi untuk menghapus task berdasarkan ID
+  // TODO: 2. Buat fungsi untuk menghapus task berdasarkan ID
   const handleDeleteTask = (id) => {
     setTasks(tasks.filter((task) => task.id != id));
   };
 
-  // TODO: 4. Buat logika filter (ALL / ACTIVE / COMPLETED) untuk array tasks
+  // TODO: 3. Buat fungsi untuk mengedit task berdasarkan ID
+  const handleUpdateTask = (id) => {
+    const selectedTask = tasks.find((task) => task.id === id);
+    if (!selectedTask) return;
+    setInputTitle(selectedTask.title);
+    setInputCategory(selectedTask.category);
+    setEditId(id);
+  };
+
+  // TODO: 4. Buat fungsi untuk menangani submit form (Tambah atau Update)
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    if (inputTitle.trim() === '') return;
+
+    if (editId !== null) {
+      setTasks(tasks.map((task) =>
+        task.id === editId ? { ...task, title: inputTitle, category: inputCategory } : task
+      ));
+      setEditId(null);
+    } else {
+      const newTask = {
+        id: Date.now(),
+        title: inputTitle,
+        category: inputCategory,
+        completed: false,
+        dueDate: 'Today', // Atur tanggal sesuai kebutuhan
+    };
+    setTasks([newTask, ...tasks]);
+    setInputTitle('');
+    setInputCategory('Dev'); // Reset kategori ke default
+    }
+  };
+
+  // TODO: 5. Buat logika filter (ALL / ACTIVE / COMPLETED) untuk array tasks
   const filteredTasks = tasks.filter((task) => {
     if (filter === 'ACTIVE') return !task.completed;
     if (filter === 'COMPLETED') return task.completed;
     return true; // ALL
   });
 
-  // TODO: 5. Hitung jumlah task yang belum selesai (completed == false)
+  // TODO: 6. Hitung jumlah task yang belum selesai (completed == false)
   const activeCount = tasks.filter((task) => !task.completed).length;
 
   return (
@@ -69,7 +87,7 @@ export default function App() {
         </header>
 
         {/* Input Form (Tambahkan Task Baru) */}
-        <form onSubmit={handleAddTask} className="flex flex-col sm:flex-row gap-3">
+        <form onSubmit={handleSubmit} className="flex flex-col sm:flex-row gap-3">
           <input
             type="text"
             placeholder="Ketik task baru kamu..."
@@ -91,8 +109,8 @@ export default function App() {
             type="submit"
             className="bg-indigo-600 hover:bg-indigo-500 text-white font-medium text-sm px-5 py-3 rounded-xl flex items-center justify-center gap-2 transition active:scale-95"
           >
-            <Plus size={18} />
-            <span>Tambah</span>
+            {editId !== null ? <Pencil size={15} /> : <Plus size={15} />}
+            <span>{editId !== null ? 'Update' : 'Tambah'}</span>
           </button>
         </form>
 
@@ -120,7 +138,7 @@ export default function App() {
         </div>
 
         {/* List Task */}
-        <div className="space-y-3">
+        <div className="space-y-2">
           {filteredTasks.length === 0 ? (
             <div className="text-center py-10 border border-dashed border-slate-700 rounded-xl">
               <p className="text-slate-500 text-sm">Tidak ada task dalam kategori ini.</p>
@@ -174,15 +192,15 @@ export default function App() {
                     className="p-2 text-slate-500 hover:text-rose-400 hover:bg-rose-500/10 rounded-lg transition"
                     title="Hapus Task"
                   >
-                    <Trash2 size={18} />
+                    <Trash2 size={15} />
                   </button>
-                  {/* <button
-                    onClick={() => handleDeleteTask(task.id)}
+                  <button
+                    onClick={() => handleUpdateTask(task.id)}
                     className="p-2 text-slate-500 hover:text-amber-400 hover:bg-amber-500/10 rounded-lg transition"
-                    title="Hapus Task"
+                    title="Edit Task"
                   >
-                    <Pencil size={18} />
-                  </button> */}
+                    <Pencil size={15} />
+                  </button>
                 </div>
               </div>
             ))
