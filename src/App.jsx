@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Plus, Check, Trash2, Calendar, CheckCircle2, Circle, Filter } from 'lucide-react';
+import { Plus, Check, Trash2, Calendar, CheckCircle2, Circle, Filter, Pencil } from 'lucide-react';
 
 export default function App() {
   // 1. State Management
@@ -58,13 +58,13 @@ export default function App() {
         {/* Header */}
         <header className="flex items-center justify-between border-b border-slate-700/60 pb-6">
           <div>
-            <h1 className="text-2xl font-bold text-white tracking-tight">Task Workspace</h1>
+            <h1 className="text-2xl font-bold text-white tracking-tight">Task Manager</h1>
             <p className="text-sm text-slate-400 mt-1">
               Kamu punya <span className="text-indigo-400 font-semibold">{activeCount} task</span> pending hari ini.
             </p>
           </div>
-          <div className="h-10 w-30 rounded-xl bg-indigo-600/20 text-indigo-400 flex items-center justify-center font-bold">
-            Task Manager
+          <div className="h-10 w-10 rounded-xl bg-indigo-600/20 text-indigo-400 flex items-center justify-center font-bold">
+            TM
           </div>
         </header>
 
@@ -168,7 +168,7 @@ export default function App() {
                 </div>
 
                 {/* Bagian Kanan: Actions */}
-                <div className="flex items-center gap-2 opacity-100 sm:opacity-0 group-hover:opacity-100 transition">
+                <div className="flex flex-col items-center gap-2 opacity-100 sm:opacity-0 group-hover:opacity-100 transition">
                   <button
                     onClick={() => handleDeleteTask(task.id)}
                     className="p-2 text-slate-500 hover:text-rose-400 hover:bg-rose-500/10 rounded-lg transition"
@@ -176,6 +176,13 @@ export default function App() {
                   >
                     <Trash2 size={18} />
                   </button>
+                  {/* <button
+                    onClick={() => handleDeleteTask(task.id)}
+                    className="p-2 text-slate-500 hover:text-amber-400 hover:bg-amber-500/10 rounded-lg transition"
+                    title="Hapus Task"
+                  >
+                    <Pencil size={18} />
+                  </button> */}
                 </div>
               </div>
             ))
